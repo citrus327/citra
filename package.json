@@ -19,11 +19,8 @@
   },
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build:base": "tsup src/index.ts --format cjs,esm --dts -d ./dist",
-    "build:cli": "tsup src/cli/index.ts --format cjs,esm --dts -d ./dist/cli",
-    "dev:base": "pnpm run build:base --watch",
-    "dev:cli": "pnpm run build:cli --watch",
-    "dev": "run-p dev:* -n -l -c",
+    "dev": "tsup --config ./tsup.config.ts --watch",
+    "build": "tsup --config ./tsup.config.ts",
     "test": "vitest run",
     "prepublishOnly": "pnpm run build"
   },
@@ -38,12 +35,19 @@
     "prettier": "^3.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vitest": "^1.1.2"
   },
   "dependencies": {
+    "@mdx-js/rollup": "^3.0.1",
+    "@vitejs/plugin-react": "^4.3.1",
     "commander": "^12.1.0",
-    "vite": "^5.2.12"
+    "vite": "^5.2.12",
+    "vite-plugin-virtual": "^0.3.0"
+  },
+  "tsup": {
+    "shims": true
   }
 }
