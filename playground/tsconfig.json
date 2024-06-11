@@ -8,7 +8,7 @@
     "allowJs": true, // allow importing `.js` from `.ts`
 
     // react
-    "jsx": "react", // support JSX
+    "jsx": "react-jsx", // support JSX
 
     // emit
     "noEmit": false,

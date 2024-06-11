@@ -1,5 +1,6 @@
 {
-  "name": "playground",
+  "name": "@citrus327/citra-playground",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +12,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@citrus327/citra": "workspace:*"
+    "@citrus327/citra": "workspace:*",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

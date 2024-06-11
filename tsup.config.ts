@@ -1,7 +1,8 @@
-import { defineConfig } from "tsup"
+import { execSync } from "child_process";
+import { defineConfig } from "tsup";
 
 export default defineConfig((options) => {
-  console.log({ options })
+  console.log({ options });
   return {
     entry: ["src/index.ts", "src/cli/index.ts"],
     splitting: false,
@@ -11,5 +12,5 @@ export default defineConfig((options) => {
     shims: true,
     format: ["cjs", "esm"],
     dts: true,
-  }
-})
+  };
+});
