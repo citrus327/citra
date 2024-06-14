@@ -1,1 +1,2 @@
-export * from "./app"
+import "./global.css";
+export * from "./app";

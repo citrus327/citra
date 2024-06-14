@@ -5,21 +5,25 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-import a from "virtual:module";
+import "./global.css";
+import { docsRoute } from "virtual:module";
 
-console.log(a);
 const router = createBrowserRouter(
   createRoutesFromElements([
-    <Route path="/" element={<div>Home</div>} />,
-    <Route path="/lazy" lazy={() => import("./routes/home")} />,
-    <Route
-      path="/d"
-      lazy={() =>
-        import(a[0]).then((module) => {
-          return { Component: module.default };
-        })
-      }
-    />,
+    <Route path="/" element={<div className="text-red-200">Home</div>} />,
+    ...docsRoute.map((route) => {
+      console.log(route);
+      return (
+        <Route
+          path={route.routePath}
+          lazy={() =>
+            import(route.absFilePath).then((module) => ({
+              Component: module.default,
+            }))
+          }
+        />
+      );
+    }),
   ])
 );
 
