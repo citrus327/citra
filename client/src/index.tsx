@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import "./global.css";
 import { docsRoute } from "virtual:module";
+import { MDXProvider } from "@mdx-js/react";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -32,6 +33,21 @@ const App = () => {
 };
 
 const container = document.getElementById("root");
-const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+const root = createRoot(container!);
 
-root.render(<App />);
+root.render(
+  <MDXProvider
+    disableParentContext
+    components={{
+      h2: (props) => {
+        console.log(props);
+        return <h1>123</h1>;
+      },
+      pre: () => {
+        return <div>codeblock!!</div>;
+      },
+    }}
+  >
+    <App />
+  </MDXProvider>
+);
