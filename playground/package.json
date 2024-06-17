@@ -13,15 +13,15 @@
   "license": "ISC",
   "devDependencies": {
     "@citrus327/citra": "workspace:*",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.2",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.3.4"
   },
   "dependencies": {
     "antd": "^5.18.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
