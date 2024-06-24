@@ -1,10 +1,8 @@
 import { Plugin, createServer } from "vite";
 import path from "path";
 import { fileURLToPath } from "url";
-import virtual from "vite-plugin-virtual";
 import react from "@vitejs/plugin-react";
 import mdx from "@mdx-js/rollup";
-import { globSync } from "glob";
 
 const run = async (pwd: string = process.cwd()) => {
   const _pwd = path.isAbsolute(pwd) ? pwd : path.resolve(process.cwd(), pwd);
@@ -14,27 +12,6 @@ const run = async (pwd: string = process.cwd()) => {
     path.dirname(fileURLToPath(import.meta.url)),
     "../../client"
   );
-
-  const matched = globSync("**/*.{md,mdx}", {
-    absolute: false,
-    cwd: _pwd,
-  });
-
-  // [
-  //   "docs/test.mdx",
-  //   "docs/test copy.mdx",
-  //   "docs/test copy 4.mdx",
-  //   "docs/test copy 3.mdx",
-  //   "docs/test copy 2.mdx",
-  // ];
-  console.log(matched);
-
-  const docsRoute = matched.map((o) => {
-    return {
-      routePath: "/" + o.replace(/\.mdx?$/, "").replace(/ /g, "-"),
-      absFilePath: path.resolve(_pwd, o),
-    };
-  });
 
   // 目标环境使用什么jsx完全看这里如何配置。
   const JSX_RUNTIME = "automatic";
@@ -46,7 +23,7 @@ const run = async (pwd: string = process.cwd()) => {
     },
     resolve: {
       alias: {
-        "@@@root": path.resolve(_pwd),
+        "@@@root": path.resolve(path.join(_pwd, "./src/index.tsx")),
       },
     },
     plugins: [
@@ -59,9 +36,6 @@ const run = async (pwd: string = process.cwd()) => {
       react({
         jsxRuntime: JSX_RUNTIME,
         include: /\.(mdx|js|jsx|ts|tsx)$/,
-      }),
-      virtual({
-        "virtual:module": `export const docsRoute = ${JSON.stringify(docsRoute, null, 2)};`,
       }),
     ],
   });
